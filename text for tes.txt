@@ -1,0 +1,3 @@
+this a normal text file 
+
+for the purspose of testing the github remote connection with the vs code
