@@ -25,14 +25,28 @@ def create_tasks(tasks):
     else:
         print("Description shouldn't be empty! Check once...")
 
-def view_tasks():
-    pass
+def view_tasks(tasks):
+    print()
+    task_lists = tasks["tasks"]
+    if len(task_lists) == 0:
+        print("No tasks to show!")
+    else:
+        print("Your To_do_list is : ")
+        for idx,task in enumerate(task_lists):
+            status = "[Completed]" if task['Completed'] else "[Pending]"
+            print(f"{idx + 1} . {task['description']} | {status}")
 
-def mark_tasks_completed():
-    pass
+def mark_tasks_completed(tasks):
+    view_tasks(tasks)
+    task_number = int(input("Enter the number to mark as Completed : ").strip())
+    if 1<=task_number<=(len(tasks["tasks"])):
+        tasks["tasks"][task_number - 1]["Completed"]=True
+        print("Task updated to completed")
+    else:
+        print("Enter a valid number....")
 
 def main():
-    tasks = "text"
+    tasks = load_tasks()
 
     while True:
         print("\n Welcome to your TO DO LIST")
@@ -45,11 +59,11 @@ def main():
         asking = input().strip()
 
         if asking == '1':
-            view_tasks()
+            view_tasks(tasks)
         elif asking == '2':
             create_tasks(tasks)
         elif asking == '3':
-            mark_tasks_completed()
+            mark_tasks_completed(tasks)
         elif asking == '4':
             load_tasks()
         elif asking == '5':
